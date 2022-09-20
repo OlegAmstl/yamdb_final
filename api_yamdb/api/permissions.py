@@ -2,6 +2,9 @@ from rest_framework import permissions
 
 
 class AdminOrReadOnly(permissions.BasePermission):
+    '''Запрет на редактирование и удаление контента,
+     кроме администратора и супераользователя.'''
+
     def has_permission(self, request, view):
         return (
             request.method in permissions.SAFE_METHODS
@@ -11,6 +14,9 @@ class AdminOrReadOnly(permissions.BasePermission):
 
 
 class OwnerOrReadOnly(permissions.BasePermission):
+    '''Запрет на редактирование и удаление контента,
+     кроме автора и модератора.'''
+
     def has_object_permission(self, request, view, obj):
         return (
             request.method in permissions.SAFE_METHODS
